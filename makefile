@@ -8,7 +8,7 @@ OBJS=$(TMP:.cc=.o)
 
 but: obj_parser.exe
 
-main.o: main.cc parser.tab.cc lex.yy.c
+main.o: main.cc parser.tab.cc lex.yy.c geo_objects.cc
 	$(CXX) $(CFLAGS) -c $<
 
 lex.yy.o: lex.yy.c
