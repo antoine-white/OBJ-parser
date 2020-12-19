@@ -34,4 +34,6 @@
 #custom/bison
 *.o
 parser.tab.cc
+parser.tab.hh
+lex.yy.c
 
