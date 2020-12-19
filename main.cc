@@ -7,12 +7,12 @@
 using namespace std;
 
 void yyerror(const char*msg){
-    printf("Error : %s",msg);
+    printf("Error : %s\n",msg);
 }
 
 int main(){
     int res = 0;
     res = yyparse();
-    cout << res << endl;
+    cout << (res == 0 ? "0 erreurs" : "problème") << endl;
     return EXIT_SUCCESS;
 }

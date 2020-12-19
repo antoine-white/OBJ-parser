@@ -1,71 +1,56 @@
 %{
+#include <iostream>
 #include "utils.hh"
 extern int yylex();
 %}
 
 // ================= //
 
-%token VAR ID PV STOCK INTEGER EQUALCOMP MINCOMP MAXCOMP IF OPENPAR CLOSEPAR OPENBLOCK CLOSEBLOCK ELSE WHILE PLUS MINUS MULTI DIVIDE;
+%define parse.error verbose
+
+%union {
+	char ident[255];
+	double value;
+    int ivalue;
+}
+
+%token VERTEX TEXTURE NORM SLASH OFF USE_MAT LISSAGE MAT_LIB FACE;
+
+%token<ivalue> INTEGER "integer";
+%token<value> FLOAT;
+%token<ident> ID FILE_STR;
 
 %start root
 
 %%
 
-root: main {printf("\nROOT");}
-;
+root : instr root|
 
-main:  instr main |
-;
+instr: vertex | normale | texture | bibli | use_mat | lissage| face;
 
-instr : decl {printf("\ninstr");} 
-| affect {printf("\ninstr ");}
-| if {printf("\ninstr");} 
-| while {printf("\ninstr");}
-;
+face : triangle | triangle_texture | triangle_normal | triangle_texture_normale;
 
-subBlock: block | instr
-;
+triangle : FACE number number number;
 
-block: OPENBLOCK main CLOSEBLOCK {printf("\nblock");}
-| OPENBLOCK CLOSEBLOCK {printf("\nempty block ");}
-;
+triangle_texture : FACE number SLASH number  number SLASH number  number SLASH number ;
 
-expr: ID { printf("\nEXPR : ID") ; }
-|INTEGER {printf("\nEXPR : INT") ; }
-;
+triangle_normal : FACE number SLASH SLASH number  number SLASH SLASH number  number SLASH SLASH number ;
 
-decl: VAR ID PV {printf("\ndecl ");}
-;
+triangle_texture_normale : FACE number SL
 
-rvalue: expr | operation {printf("operation");}
-;
+vertex : VERTEX number number number;
 
-affect: VAR ID STOCK rvalue PV { printf("\naffect ");}
-| ID STOCK rvalue PV { printf("\naffect 2");}
-;
+normale : NORM number number number;
 
-if: IF subTest subBlock {printf("\nif");}
-| IF subTest subBlock ELSE subBlock{printf("\nif else");}
-;
+texture: TEXTURE number number;
 
-while  : WHILE subTest subBlock {printf("\nwhile");}
+bibli : MAT_LIB FILE_STR;
 
+use_mat : USE_MAT ID;
 
-subTest : OPENPAR comp CLOSEPAR
-;
+lissage : LISSAGE INTEGER| LISSAGE OFF;
 
-operation : expr binOperator expr {printf("\nOperation");}
-;
-
-comp:  expr comparator expr {printf("\nComparaison ");}
-;
-
-comparator: EQUALCOMP {printf("\n== ");} | MINCOMP {printf("\n < ");} | MAXCOMP { printf("\n > ");} 
-;
-
-binOperator : MINUS | PLUS | DIVIDE | MULTI {printf("binary operaator");}
-;
-
+number : FLOAT | INTEGER
 
 %%
 

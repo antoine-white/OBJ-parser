@@ -6,44 +6,30 @@
 %% 
 
 
-if  {return IF;}
+usemtl {return USE_MAT;}
 
-else  {return ELSE;}
+mtllib {return MAT_LIB;}
 
-var {return VAR;}
+"/" { return SLASH;}
 
-while {return WHILE;}
+"\n"  {}
 
-[a-zA-Z]+ {return ID;}
+vt {return TEXTURE;}
 
-[0-9]+ {return INTEGER;} 
+off {return OFF;}
 
-"=" {return STOCK;}
+s {return LISSAGE;}
 
-";" {return PV;}
+v  {return VERTEX;}
 
-"==" {return EQUALCOMP;}
+n  {return NORM;}
 
-"<" {return MINCOMP;}
+[-+]?[0-9]* { yylval.ivalue = atoi(yytext); return INTEGER;}
 
-">"  {return MAXCOMP;}
+[a-zA-Z_][a-zA-Z0-9_]* {strcpy(yylval.ident,yytext); return ID;}
 
-"(" {return OPENPAR;}
+[a-zA-Z_][a-zA-Z0-9_]*[.][a-zA-Z]+ { strcpy(yylval.ident,yytext); return FILE_STR;}
 
-")" {return CLOSEPAR;}
-
-"{" {return OPENBLOCK;}
-
-"}" {return CLOSEBLOCK;}
-
-"+" {return PLUS;}
-
-"-" {return MINUS;}
-
-"*" {return MULTI;}
-
-"/" {return DIVIDE;}
-
-./\n {}
+[-+]?[0-9]*([.][0-9]+)?([eE][+-]?[0-9]+)?	{ yylval.value = atof(yytext); return FLOAT; }
 
 %% 
