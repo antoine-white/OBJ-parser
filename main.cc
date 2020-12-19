@@ -13,6 +13,6 @@ void yyerror(const char*msg){
 int main(){
     int res = 0;
     res = yyparse();
-    cout << (res == 0 ? "0 erreurs" : "problème") << endl;
+    cout << (res == 0 ? "0 erreur" : "Problème") << endl;
     return EXIT_SUCCESS;
 }

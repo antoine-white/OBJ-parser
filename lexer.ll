@@ -14,6 +14,10 @@ mtllib {return MAT_LIB;}
 
 "\n"  {}
 
+"#".* {}
+
+f {return FACE;}
+
 vt {return TEXTURE;}
 
 off {return OFF;}
@@ -32,4 +36,5 @@ n  {return NORM;}
 
 [-+]?[0-9]*([.][0-9]+)?([eE][+-]?[0-9]+)?	{ yylval.value = atof(yytext); return FLOAT; }
 
+. {}
 %% 
