@@ -47,7 +47,7 @@ group : GROUP ID;
 
 face : triangle | triangle_texture | triangle_normal | triangle_texture_normale;
 
-vertex : VERTEX number number number;
+vertex : VERTEX number number number 
 
 normale : NORM number number number;
 
@@ -61,17 +61,31 @@ lissage : LISSAGE INTEGER| LISSAGE OFF;
 
 number : FLOAT | INTEGER
 
-triangle : FACE INTEGER INTEGER INTEGER;
 
-triangle_texture : FACE  face_texture face_texture face_texture;
+
+triangle : FACE INTEGER INTEGER list_coord;
+
+list_coord : INTEGER | INTEGER list_coord;
+
+
+triangle_texture : FACE  face_texture face_texture list_face_texture;
+
+list_face_texture : face_texture | face_texture list_face_texture;
 
 face_texture : INTEGER SLASH INTEGER ;
 
-triangle_normal : FACE   face_normal face_normal face_normal;
+
+triangle_normal : FACE   face_normal face_normal list_face_normal;
+
+list_face_normal : face_normal | face_normal list_face_normal;
 
 face_normal : INTEGER SLASH SLASH INTEGER;
 
-triangle_texture_normale : FACE face_normal_texture face_normal_texture face_normal_texture
+
+
+triangle_texture_normale : FACE face_normal_texture face_normal_texture list_face_normal_texture;
+
+list_face_normal_texture : face_normal_texture | face_normal_texture list_face_normal_texture;
 
 face_normal_texture :  INTEGER SLASH INTEGER SLASH INTEGER
 
