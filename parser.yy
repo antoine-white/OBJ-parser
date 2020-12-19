@@ -34,9 +34,11 @@ triangle : FACE number number number;
 
 triangle_texture : FACE number SLASH number  number SLASH number  number SLASH number ;
 
+
+
 triangle_normal : FACE number SLASH SLASH number  number SLASH SLASH number  number SLASH SLASH number ;
 
-triangle_texture_normale : FACE number SL
+triangle_texture_normale : FACE number SLASH number SLASH number
 
 vertex : VERTEX number number number;
 
