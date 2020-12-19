@@ -2,6 +2,7 @@
   #include "parser.tab.hh"
 %} 
 
+%option yylineno
 
 %% 
 

@@ -6,6 +6,8 @@ extern int yylex();
 
 // ================= //
 
+%locations
+
 %define parse.error verbose
 
 %union {

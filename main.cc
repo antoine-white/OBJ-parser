@@ -6,8 +6,11 @@
 
 using namespace std;
 
+
+extern int yylineno;
+
 void yyerror(const char*msg){
-    printf("Error : %s\n",msg);
+    printf("Error line %d :\n %s\n",yylineno ,msg);
 }
 
 int main(){
