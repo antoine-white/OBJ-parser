@@ -25,9 +25,13 @@ off {return OFF;}
 
 s {return LISSAGE;}
 
+o {return OBJECT;}
+
+g {return GROUP;}
+
 v  {return VERTEX;}
 
-n  {return NORM;}
+vn  {return NORM;}
 
 [-+]?[0-9]* { yylval.ivalue = atoi(yytext); return INTEGER;}
 

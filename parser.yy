@@ -25,6 +25,8 @@ extern int yylex();
 %token LISSAGE "lissage";
 %token MAT_LIB "material library loading instruction";
 %token FACE "face declaration";
+%token OBJECT "object declaration";
+%token GROUP "group declaration";
 
 %token<ivalue> INTEGER "integer";
 %token<value> FLOAT "float";
@@ -37,7 +39,11 @@ extern int yylex();
 
 root : instr root|
 
-instr: vertex | normale | texture | bibli | use_mat | lissage| face;
+instr: vertex | normale | texture | bibli | use_mat | lissage| face | obj | group;
+
+obj : OBJECT ID;
+
+group : GROUP ID;
 
 face : triangle | triangle_texture | triangle_normal | triangle_texture_normale;
 
@@ -55,19 +61,19 @@ lissage : LISSAGE INTEGER| LISSAGE OFF;
 
 number : FLOAT | INTEGER
 
-triangle : FACE number number number;
+triangle : FACE INTEGER INTEGER INTEGER;
 
 triangle_texture : FACE  face_texture face_texture face_texture;
 
-face_texture : number SLASH number ;
+face_texture : INTEGER SLASH INTEGER ;
 
 triangle_normal : FACE   face_normal face_normal face_normal;
 
-face_normal : number SLASH SLASH number;
+face_normal : INTEGER SLASH SLASH INTEGER;
 
 triangle_texture_normale : FACE face_normal_texture face_normal_texture face_normal_texture
 
-face_normal_texture :  number SLASH number SLASH number
+face_normal_texture :  INTEGER SLASH INTEGER SLASH INTEGER
 
 %%
 
