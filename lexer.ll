@@ -38,9 +38,10 @@ vn  {return NORM;}
 
 [a-zA-Z_][a-zA-Z0-9_]* {strcpy(yylval.ident,yytext); return ID;}
 
-[a-zA-Z_][a-zA-Z0-9_]*[.][a-zA-Z]+ { strcpy(yylval.ident,yytext); return FILE_STR;}
+[a-zA-Z_][a-zA-Z0-9_]*[.][a-zA-Z0-9]+ { strcpy(yylval.ident,yytext); return FILE_STR;}
 
 [-+]?[0-9]*([.][0-9]+)?([eE][+-]?[0-9]+)?	{ yylval.value = atof(yytext); return FLOAT; }
+
 
 . {}
 %% 
